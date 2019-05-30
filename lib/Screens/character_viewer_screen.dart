@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../Models/character.dart';
 import '../Screens/character_editor_screen.dart';
-import '../Screens/buff_editor_screen.dart';
-import '../Screens/attack_editor_screen.dart';
+import '../Screens/buff_viewer_screen.dart';
+import '../Screens/attack_viewer_screen.dart';
 import '../Widgets/attack_card.dart';
 
 enum CharacterCardOption { delete, edit }
@@ -167,7 +167,11 @@ class CharacterViewerState extends State<CharacterViewer> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 35.0),
               child: Row(children: [
-                Text("BAB: ${_character.getBAB()}"),
+                Text("BAB: "),
+                Text("${_character.getTotalAttackBonus()}",
+                    style: _character.getBAB() != _character.getTotalAttackBonus()
+                        ? TextStyle(color: Colors.green)
+                        : TextStyle(color: Colors.black)),
               ]),
             ),
           ]),
@@ -183,7 +187,7 @@ class CharacterViewerState extends State<CharacterViewer> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BuffEditor(_character)),
+                          builder: (context) => BuffViewer(_character)),
                     );
                   },
                   child: Text("Buffs"),
@@ -200,7 +204,7 @@ class CharacterViewerState extends State<CharacterViewer> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AttackEditor(_character)),
+                          builder: (context) => AttackViewer(_character)),
                     );
                   },
                 ),

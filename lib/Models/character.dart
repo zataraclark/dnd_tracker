@@ -1,4 +1,4 @@
-import './stat_buff.dart';
+import './buff.dart';
 import './attack.dart';
 
 class Character {
@@ -6,22 +6,19 @@ class Character {
 
   String name = 'New Character';
 
-  int _base_str = 10;
-  int _base_dex = 10;
-  int _base_con = 10;
-  int _base_int = 10;
-  int _base_wis = 10;
-  int _base_cha = 10;
+  int _baseStr = 10;
+  int _baseDex = 10;
+  int _baseCon = 10;
+  int _baseInt = 10;
+  int _baseWis = 10;
+  int _baseCha = 10;
 
   int _bab = 0;
 
-  List<StatBuff> buffs = [];
+  List<Buff> buffs = [];
   List<Attack> attacks = [];
 
-  void addBuff(StatBuff newBuff) {
-    if(newBuff.ability == null) {
-      newBuff.ability = Ability.str;
-    }
+  void addBuff(Buff newBuff) {
     buffs.add(newBuff);
   }
 
@@ -30,11 +27,9 @@ class Character {
   }
 
   int getTotalStr() {
-    int total = _base_str;
+    int total = _baseStr;
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.str) {
-        total += buffs[i].buffStat;
-      }
+        total += buffs[i].strStat;
     }
     return total;
   }
@@ -42,19 +37,15 @@ class Character {
   int getTotalStrMod() {
     int total = (((getTotalStr() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.str) {
-        total += buffs[i].buffMod;
-      }
+        total += buffs[i].strMod;
     }
     return total;
   }
 
   int getTotalDex() {
-    int total = _base_dex;
+    int total = _baseDex;
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.dex) {
-        total += buffs[i].buffStat;
-      }
+        total += buffs[i].dexStat;
     }
     return total;
   }
@@ -62,19 +53,15 @@ class Character {
   int getTotalDexMod() {
     int total = (((getTotalDex() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.dex) {
-        total += buffs[i].buffMod;
-      }
+        total += buffs[i].dexMod;
     }
     return total;
   }
 
   int getTotalCon() {
-    int total = _base_con;
+    int total = _baseCon;
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.con) {
-        total += buffs[i].buffStat;
-      }
+        total += buffs[i].conStat;
     }
     return total;
   }
@@ -82,19 +69,15 @@ class Character {
   int getTotalConMod() {
     int total = (((getTotalCon() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.con) {
-        total += buffs[i].buffMod;
-      }
+        total += buffs[i].conMod;
     }
     return total;
   }
 
   int getTotalInt() {
-    int total = _base_int;
+    int total = _baseInt;
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.intel) {
-        total += buffs[i].buffStat;
-      }
+        total += buffs[i].intStat;
     }
     return total;
   }
@@ -102,19 +85,15 @@ class Character {
   int getTotalIntMod() {
     int total = (((getTotalInt() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.intel) {
-        total += buffs[i].buffMod;
-      }
+        total += buffs[i].intMod;
     }
     return total;
   }
 
   int getTotalWis() {
-    int total = _base_wis;
+    int total = _baseWis;
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.wis) {
-        total += buffs[i].buffStat;
-      }
+        total += buffs[i].wisStat;
     }
     return total;
   }
@@ -122,19 +101,15 @@ class Character {
   int getTotalWisMod() {
     int total = (((getTotalWis() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.wis) {
-        total += buffs[i].buffMod;
-      }
+        total += buffs[i].wisMod;
     }
     return total;
   }
 
   int getTotalCha() {
-    int total = _base_cha;
+    int total = _baseCha;
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.cha) {
-        total += buffs[i].buffStat;
-      }
+        total += buffs[i].chaStat;
     }
     return total;
   }
@@ -142,35 +117,41 @@ class Character {
   int getTotalChaMod() {
     int total = (((getTotalCha() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-      if (buffs[i].ability == Ability.cha) {
-        total += buffs[i].buffMod;
-      }
+        total += buffs[i].chaMod;
+    }
+    return total;
+  }
+
+  int getTotalAttackBonus() {
+    int total = _bab;
+    for (int i = 0; i < buffs.length; i++) {
+        total += buffs[i].attackBonus;
     }
     return total;
   }
 
   int getBaseStr() {
-    return _base_str;
+    return _baseStr;
   }
 
   int getBaseDex() {
-    return _base_dex;
+    return _baseDex;
   }
 
   int getBaseCon() {
-    return _base_con;
+    return _baseCon;
   }
 
   int getBaseInt() {
-    return _base_int;
+    return _baseInt;
   }
 
   int getBaseWis() {
-    return _base_wis;
+    return _baseWis;
   }
 
   int getBaseCha() {
-    return _base_cha;
+    return _baseCha;
   }
 
   int getBAB() {
@@ -178,51 +159,51 @@ class Character {
   }
 
   int getStrMod() {
-    return (((_base_str - 10) / 2)).floor();
+    return (((_baseStr - 10) / 2)).floor();
   }
 
   int getDexMod() {
-    return (((_base_dex - 10) / 2)).floor();
+    return (((_baseDex - 10) / 2)).floor();
   }
 
   int getConMod() {
-    return (((_base_con - 10) / 2)).floor();
+    return (((_baseCon - 10) / 2)).floor();
   }
 
   int getIntMod() {
-    return (((_base_int - 10) / 2)).floor();
+    return (((_baseInt - 10) / 2)).floor();
   }
 
   int getWisMod() {
-    return (((_base_wis - 10) / 2)).floor();
+    return (((_baseWis - 10) / 2)).floor();
   }
 
   int getChaMod() {
-    return (((_base_cha - 10) / 2)).floor();
+    return (((_baseCha - 10) / 2)).floor();
   }
 
   void setBaseStr(int newStat) {
-    _base_str = newStat;
+    _baseStr = newStat;
   }
 
   void setBaseDex(int newStat) {
-    _base_dex = newStat;
+    _baseDex = newStat;
   }
 
   void setBaseCon(int newStat) {
-    _base_con = newStat;
+    _baseCon = newStat;
   }
 
   void setBaseInt(int newStat) {
-    _base_int = newStat;
+    _baseInt = newStat;
   }
 
   void setBaseWis(int newStat) {
-    _base_wis = newStat;
+    _baseWis = newStat;
   }
 
   void setBaseCha(int newStat) {
-    _base_cha = newStat;
+    _baseCha = newStat;
   }
 
   void setBAB(int newStat) {

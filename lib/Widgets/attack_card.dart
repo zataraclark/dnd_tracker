@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Models/character.dart';
 import '../Models/attack.dart';
-import '../Screens/attack_editor_screen.dart';
+import '../Screens/attack_viewer_screen.dart';
 
 class AttackCard extends StatelessWidget {
   final Attack _attack;
@@ -16,7 +16,7 @@ class AttackCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => AttackEditor(_character)),
+              builder: (context) => AttackViewer(_character)),
         );
       },
       child: Card(

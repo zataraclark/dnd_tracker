@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-import './character.dart';
-import './character_card.dart';
-import './character_editor.dart';
+import '../Models/character.dart';
+import '../Widgets/character_card.dart';
+import './character_editor_screen.dart';
+import './settings_screen.dart';
 
+enum AppOption { settings }
 enum ConfirmAction { DELETE, CANCEL }
 
 class Manager extends StatefulWidget {
@@ -66,7 +68,30 @@ class _ManagerState extends State<Manager> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Characters'),
+        actions: [
+          PopupMenuButton<AppOption>(
+              onSelected: (AppOption result) {
+                if (result == AppOption.settings) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Settings()),
+                  );
+                }
+              },
+              itemBuilder: (BuildContext context) =>
+                  <PopupMenuEntry<AppOption>>[
+                    const PopupMenuItem<AppOption>(
+                      value: AppOption.settings,
+                      child: Text("Settings"),
+                    ),
+                  ]),
+        ],
+      ),
+      body: Center(
+        child: Column(
       children: [
         Center(
           child: RaisedButton(
@@ -83,6 +108,9 @@ class _ManagerState extends State<Manager> {
           ),
         ),
       ],
+    ),
+      ),
     );
   }
 }
+

@@ -4,22 +4,22 @@ import '../Models/character.dart';
 import '../Models/attack.dart';
 import '../Widgets/attack_card.dart';
 
-class AttackEditor extends StatefulWidget {
+class AttackViewer extends StatefulWidget {
   final Character _character;
 
-  AttackEditor(this._character);
+  AttackViewer(this._character);
 
   createState() {
-    return AttackEditorState(_character);
+    return AttackViewerState(_character);
   }
 }
 
-class AttackEditorState extends State<AttackEditor> {
+class AttackViewerState extends State<AttackViewer> {
   Character _character;
 
-  AttackEditorState(this._character);
+  AttackViewerState(this._character);
 
-  Future<Attack> addAttackDialog(BuildContext context) async {
+  Future<Attack> _addAttackDialog(BuildContext context) async {
     String attackName;
     bool addDex = false;
     bool addStr = true;
@@ -119,8 +119,8 @@ class AttackEditorState extends State<AttackEditor> {
                   style: Theme.of(context).textTheme.body2,
                 ),
                 onPressed: () async {
-                  final Attack newBuff = await addAttackDialog(context);
-                  _character.addAttack(newBuff);
+                  final Attack newAttack = await _addAttackDialog(context);
+                  _character.addAttack(newAttack);
                 }),
                 Expanded(
               child: ListView.builder(
