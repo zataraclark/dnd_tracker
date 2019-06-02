@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Models/attack.dart';
 import '../Models/character.dart';
 import '../Screens/character_editor_screen.dart';
 import '../Screens/buff_viewer_screen.dart';
@@ -15,28 +16,33 @@ class CharacterViewer extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return CharacterViewerState(_character, _deleteCharacter);
+    return CharacterViewerState();
   }
 }
 
 class CharacterViewerState extends State<CharacterViewer> {
-  final Character _character;
-  final Function _deleteCharacter;
-  CharacterViewerState(this._character, this._deleteCharacter);
+
+  CharacterViewerState();
+
+  void _deleteAttack(Attack victim) {
+    setState(() {
+      this.widget._character.attacks.remove(victim);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("${_character.name}"), actions: [
+      appBar: AppBar(title: Text("${this.widget._character.name}"), actions: [
         PopupMenuButton<CharacterCardOption>(
             onSelected: (CharacterCardOption result) {
               if (result == CharacterCardOption.delete) {
-                _deleteCharacter(_character);
+                this.widget._deleteCharacter(this.widget._character);
               } else if (result == CharacterCardOption.edit) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CharacterEditor(_character)),
+                      builder: (context) => CharacterEditor(this.widget._character)),
                 );
               }
             },
@@ -61,14 +67,14 @@ class CharacterViewerState extends State<CharacterViewer> {
               child: Row(children: [
                 Text("Str: "),
                 Text(
-                  "${_character.getTotalStr()}   ",
-                  style: _character.getBaseStr() != _character.getTotalStr()
+                  "${this.widget._character.getTotalStr()}   ",
+                  style: this.widget._character.getBaseStr() != this.widget._character.getTotalStr()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
                 Text(
-                  "${_character.getTotalStrMod()}",
-                  style: _character.getStrMod() != _character.getTotalStrMod()
+                  "${this.widget._character.getTotalStrMod()}",
+                  style: this.widget._character.getStrMod() != this.widget._character.getTotalStrMod()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
@@ -79,14 +85,14 @@ class CharacterViewerState extends State<CharacterViewer> {
               child: Row(children: [
                 Text("Dex: "),
                 Text(
-                  "${_character.getTotalDex()}   ",
-                  style: _character.getBaseDex() != _character.getTotalDex()
+                  "${this.widget._character.getTotalDex()}   ",
+                  style: this.widget._character.getBaseDex() != this.widget._character.getTotalDex()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
                 Text(
-                  "${_character.getTotalDexMod()}",
-                  style: _character.getDexMod() != _character.getTotalDexMod()
+                  "${this.widget._character.getTotalDexMod()}",
+                  style: this.widget._character.getDexMod() != this.widget._character.getTotalDexMod()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
@@ -97,14 +103,14 @@ class CharacterViewerState extends State<CharacterViewer> {
               child: Row(children: [
                 Text("Con: "),
                 Text(
-                  "${_character.getTotalCon()}   ",
-                  style: _character.getBaseCon() != _character.getTotalCon()
+                  "${this.widget._character.getTotalCon()}   ",
+                  style: this.widget._character.getBaseCon() != this.widget._character.getTotalCon()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
                 Text(
-                  "${_character.getTotalConMod()}",
-                  style: _character.getConMod() != _character.getTotalConMod()
+                  "${this.widget._character.getTotalConMod()}",
+                  style: this.widget._character.getConMod() != this.widget._character.getTotalConMod()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
@@ -115,14 +121,14 @@ class CharacterViewerState extends State<CharacterViewer> {
               child: Row(children: [
                 Text("Int: "),
                 Text(
-                  "${_character.getTotalInt()}   ",
-                  style: _character.getBaseInt() != _character.getTotalInt()
+                  "${this.widget._character.getTotalInt()}   ",
+                  style: this.widget._character.getBaseInt() != this.widget._character.getTotalInt()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
                 Text(
-                  "${_character.getTotalIntMod()}",
-                  style: _character.getIntMod() != _character.getTotalIntMod()
+                  "${this.widget._character.getTotalIntMod()}",
+                  style: this.widget._character.getIntMod() != this.widget._character.getTotalIntMod()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
@@ -133,14 +139,14 @@ class CharacterViewerState extends State<CharacterViewer> {
               child: Row(children: [
                 Text("Wis: "),
                 Text(
-                  "${_character.getTotalWis()}   ",
-                  style: _character.getBaseWis() != _character.getTotalWis()
+                  "${this.widget._character.getTotalWis()}   ",
+                  style: this.widget._character.getBaseWis() != this.widget._character.getTotalWis()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
                 Text(
-                  "${_character.getTotalWisMod()}",
-                  style: _character.getWisMod() != _character.getTotalWisMod()
+                  "${this.widget._character.getTotalWisMod()}",
+                  style: this.widget._character.getWisMod() != this.widget._character.getTotalWisMod()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
@@ -151,14 +157,14 @@ class CharacterViewerState extends State<CharacterViewer> {
               child: Row(children: [
                 Text("Cha: "),
                 Text(
-                  "${_character.getTotalCha()}   ",
-                  style: _character.getBaseCha() != _character.getTotalCha()
+                  "${this.widget._character.getTotalCha()}   ",
+                  style: this.widget._character.getBaseCha() != this.widget._character.getTotalCha()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
                 Text(
-                  "${_character.getTotalChaMod()}",
-                  style: _character.getChaMod() != _character.getTotalChaMod()
+                  "${this.widget._character.getTotalChaMod()}",
+                  style: this.widget._character.getChaMod() != this.widget._character.getTotalChaMod()
                       ? TextStyle(color: Colors.green)
                       : TextStyle(color: Colors.black),
                 ),
@@ -168,10 +174,11 @@ class CharacterViewerState extends State<CharacterViewer> {
               padding: EdgeInsets.symmetric(horizontal: 35.0),
               child: Row(children: [
                 Text("BAB: "),
-                Text("${_character.getTotalAttackBonus()}",
-                    style: _character.getBAB() != _character.getTotalAttackBonus()
-                        ? TextStyle(color: Colors.green)
-                        : TextStyle(color: Colors.black)),
+                Text("${this.widget._character.getTotalAttackBonus()}",
+                    style:
+                        this.widget._character.getBAB() != this.widget._character.getTotalAttackBonus()
+                            ? TextStyle(color: Colors.green)
+                            : TextStyle(color: Colors.black)),
               ]),
             ),
           ]),
@@ -187,7 +194,7 @@ class CharacterViewerState extends State<CharacterViewer> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BuffViewer(_character)),
+                          builder: (context) => BuffViewer(this.widget._character)),
                     );
                   },
                   child: Text("Buffs"),
@@ -204,7 +211,7 @@ class CharacterViewerState extends State<CharacterViewer> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AttackViewer(_character)),
+                          builder: (context) => AttackViewer(this.widget._character)),
                     );
                   },
                 ),
@@ -214,9 +221,9 @@ class CharacterViewerState extends State<CharacterViewer> {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: _character.attacks.length,
+            itemCount: this.widget._character.attacks.length,
             itemBuilder: (BuildContext context, int index) {
-              return AttackCard(_character.attacks[index], _character);
+              return AttackCard(this.widget._character.attacks[index], _deleteAttack);
             },
           ),
         ),

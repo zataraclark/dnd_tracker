@@ -10,19 +10,18 @@ class BuffEditor extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return BuffEditorState(_buff);
+    return BuffEditorState();
   }
 }
 
 class BuffEditorState extends State<BuffEditor> {
-  Buff _buff;
-
-  BuffEditorState(this._buff);
+  
+  BuffEditorState();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( // I would like to add a menu here where you can delete the buff from inside the buff editor screen
         title: Text("Edit Buff"),
       ),
       body: GestureDetector(
@@ -31,82 +30,124 @@ class BuffEditorState extends State<BuffEditor> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Center(
-          child: Column(children: [
-            Container(
-              height: 60.0,
-              width: 300.0,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "${_buff.buffName}",
-                  hintStyle: TextStyle(fontSize: 18.0),
+          child: ListView(children: [
+            Column(children: [
+              Container(
+                padding:EdgeInsets.fromLTRB(0, 10, 0, 0),
+                height: 60.0,
+                width: 300.0,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "${this.widget._buff.name}",
+                    hintStyle: TextStyle(fontSize: 18.0),
+                  ),
+                  textCapitalization: TextCapitalization.words,
+                  onChanged: (text) {
+                    this.widget._buff.name = text;
+                  },
                 ),
-                textCapitalization: TextCapitalization.words,
-                onChanged: (text) {
-                  _buff.buffName = text;
-                },
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(children: [
-                Row(children: [
-                  Column(children: [
-                    Entry("Str Stat", _buff.getStrStat, (text) {
-                      _buff.setStrStat(int.parse(text));
-                    }),
-                    Entry("Dex Stat", _buff.getDexStat, (text) {
-                      _buff.setDexStat(int.parse(text));
-                    }),
-                    Entry("Con Stat", _buff.getConStat, (text) {
-                      _buff.setConStat(int.parse(text));
-                    }),
-                    Entry("Int Stat", _buff.getIntStat, (text) {
-                      _buff.setIntStat(int.parse(text));
-                    }),
-                    Entry("Wis Stat", _buff.getWisStat, (text) {
-                      _buff.setWisStat(int.parse(text));
-                    }),
-                    Entry("Cha Stat", _buff.getChaStat, (text) {
-                      _buff.setChaStat(int.parse(text));
-                    }),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(children: [
+                  Row(children: [
+                    Column(children: [
+                      Entry("Str Stat", this.widget._buff.getStrStat, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setStrStat(int.parse(text));
+                      }),
+                      Entry("Dex Stat", this.widget._buff.getDexStat, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setDexStat(int.parse(text));
+                      }),
+                      Entry("Con Stat", this.widget._buff.getConStat, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setConStat(int.parse(text));
+                      }),
+                      Entry("Int Stat", this.widget._buff.getIntStat, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setIntStat(int.parse(text));
+                      }),
+                      Entry("Wis Stat", this.widget._buff.getWisStat, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setWisStat(int.parse(text));
+                      }),
+                      Entry("Cha Stat", this.widget._buff.getChaStat, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setChaStat(int.parse(text));
+                      }),
+                    ]),
+                    Column(children: [
+                      Entry("Str Mod", this.widget._buff.getStrMod, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setStrMod(int.parse(text));
+                      }),
+                      Entry("Dex Mod", this.widget._buff.getDexMod, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setDexMod(int.parse(text));
+                      }),
+                      Entry("Con Mod", this.widget._buff.getConMod, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setConMod(int.parse(text));
+                      }),
+                      Entry("Int Mod", this.widget._buff.getIntMod, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setIntMod(int.parse(text));
+                      }),
+                      Entry("Wis Mod", this.widget._buff.getWisMod, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setWisMod(int.parse(text));
+                      }),
+                      Entry("Cha Mod", this.widget._buff.getChaMod, (text) {
+                        if(text == "") {
+                          text = "0";
+                        }
+                        this.widget._buff.setChaMod(int.parse(text));
+                      }),
+                    ])
                   ]),
-                  Column(children: [
-                    Entry("Str Mod", _buff.getStrMod, (text) {
-                      _buff.setStrMod(int.parse(text));
-                    }),
-                    Entry("Dex Mod", _buff.getDexMod, (text) {
-                      _buff.setDexMod(int.parse(text));
-                    }),
-                    Entry("Con Mod", _buff.getDexMod, (text) {
-                      _buff.setDexMod(int.parse(text));
-                    }),
-                    Entry("Int Mod", _buff.getDexMod, (text) {
-                      _buff.setDexMod(int.parse(text));
-                    }),
-                    Entry("Wis Mod", _buff.getDexMod, (text) {
-                      _buff.setDexMod(int.parse(text));
-                    }),
-                    Entry("Cha Mod", _buff.getDexMod, (text) {
-                      _buff.setDexMod(int.parse(text));
-                    }),
-                  ])
+                  Entry("Attack Bonus", this.widget._buff.getAttackBonus, (text) {
+                    if(text == "") {
+                          text = "0";
+                        }
+                    this.widget._buff.setAttackBonus(int.parse(text));
+                  }),
                 ]),
-                Entry("Attack Bonus", _buff.getAttackBonus, (text) {
-                    _buff.setAttackBonus(int.parse(text));
-                  })
-              ]),
-            ),
-            Align(
-              alignment: FractionalOffset.bottomRight,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: RaisedButton(
-                    child: Text("Finish"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }),
               ),
-            ),
+              Align(
+                alignment: FractionalOffset.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      child: Text("Finish"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                ),
+              ),
+            ]),
           ]),
         ),
       ),

@@ -23,7 +23,7 @@ class _ManagerState extends State<Manager> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Are You Sure You Want To Delete This Character?", style: TextStyle(fontStyle: FontStyle.normal,fontSize: 20.0)),
+          title: Text("Are You Sure You Want To Delete This Character?"),
           content: Text("This cannot be undone!"),
           actions: <Widget>[
             FlatButton(
@@ -77,7 +77,7 @@ class _ManagerState extends State<Manager> {
                 if (result == AppOption.settings) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Settings()),
+                    MaterialPageRoute(builder: (context) => Settings(context)),
                   );
                 }
               },

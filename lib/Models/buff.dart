@@ -1,8 +1,9 @@
 
 class Buff {
   Buff();
+  Buff.attackBonus(this.name, this.attackBonus, this.active);
 
-  String buffName = "New Buff";
+  String name = "New Buff";
   int strStat = 0;
   int strMod = 0;
   int dexStat = 0;
@@ -16,6 +17,8 @@ class Buff {
   int chaStat = 0;
   int chaMod = 0;
   int attackBonus = 0;
+
+  bool active = true;
 
   void setStrStat(int newStat) {
     strStat = newStat;
@@ -121,5 +124,9 @@ class Buff {
 
   int getAttackBonus() {
     return attackBonus;
+  }
+
+  int getTotalMod() {
+    return strMod + dexMod + conMod + intMod + wisMod + chaMod + attackBonus;
   }
 }

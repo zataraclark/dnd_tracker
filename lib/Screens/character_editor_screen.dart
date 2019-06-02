@@ -9,14 +9,13 @@ class CharacterEditor extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return CharacterEditorState(_character);
+    return CharacterEditorState();
   }
 }
 
 class CharacterEditorState extends State<CharacterEditor> {
-  Character _character;
 
-  CharacterEditorState(this._character);
+  CharacterEditorState();
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +35,12 @@ class CharacterEditorState extends State<CharacterEditor> {
               width: 300.0,
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: "${_character.name}",
+                  hintText: "${this.widget._character.name}",
                   hintStyle: TextStyle(fontSize: 18.0),
                 ),
                 textCapitalization: TextCapitalization.words,
                 onChanged: (text) {
-                  _character.name = text;
+                  this.widget._character.name = text;
                 },
               ),
             ),
@@ -61,12 +60,12 @@ class CharacterEditorState extends State<CharacterEditor> {
                             style: Theme.of(context).textTheme.body2,
                             maxLength: 2,
                             decoration: InputDecoration(
-                              hintText: "${_character.getBaseStr()}",
+                              hintText: "${this.widget._character.getBaseStr()}",
                               counterText: "",
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (text) {
-                              _character.setBaseStr(int.parse(text));
+                              this.widget._character.setBaseStr(int.parse(text));
                             },
                           ),
                         ),
@@ -81,12 +80,12 @@ class CharacterEditorState extends State<CharacterEditor> {
                             style: Theme.of(context).textTheme.body2,
                             maxLength: 2,
                             decoration: InputDecoration(
-                              hintText: "${_character.getBaseDex()}",
+                              hintText: "${this.widget._character.getBaseDex()}",
                               counterText: "",
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (text) {
-                              _character.setBaseDex(int.parse(text));
+                              this.widget._character.setBaseDex(int.parse(text));
                             },
                           ),
                         ),
@@ -101,12 +100,12 @@ class CharacterEditorState extends State<CharacterEditor> {
                             style: Theme.of(context).textTheme.body2,
                             maxLength: 2,
                             decoration: InputDecoration(
-                              hintText: "${_character.getBaseCon()}",
+                              hintText: "${this.widget._character.getBaseCon()}",
                               counterText: "",
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (text) {
-                              _character.setBaseCon(int.parse(text));
+                              this.widget._character.setBaseCon(int.parse(text));
                             },
                           ),
                         ),
@@ -127,12 +126,12 @@ class CharacterEditorState extends State<CharacterEditor> {
                           style: Theme.of(context).textTheme.body2,
                           maxLength: 2,
                           decoration: InputDecoration(
-                            hintText: "${_character.getBaseInt()}",
+                            hintText: "${this.widget._character.getBaseInt()}",
                             counterText: "",
                           ),
                           keyboardType: TextInputType.number,
                           onChanged: (text) {
-                            _character.setBaseInt(int.parse(text));
+                            this.widget._character.setBaseInt(int.parse(text));
                           },
                         ),
                       ),
@@ -147,12 +146,12 @@ class CharacterEditorState extends State<CharacterEditor> {
                           style: Theme.of(context).textTheme.body2,
                           maxLength: 2,
                           decoration: InputDecoration(
-                            hintText: "${_character.getBaseWis()}",
+                            hintText: "${this.widget._character.getBaseWis()}",
                             counterText: "",
                           ),
                           keyboardType: TextInputType.number,
                           onChanged: (text) {
-                            _character.setBaseWis(int.parse(text));
+                            this.widget._character.setBaseWis(int.parse(text));
                           },
                         ),
                       ),
@@ -167,12 +166,12 @@ class CharacterEditorState extends State<CharacterEditor> {
                           style: Theme.of(context).textTheme.body2,
                           maxLength: 2,
                           decoration: InputDecoration(
-                            hintText: "${_character.getBaseCha()}",
+                            hintText: "${this.widget._character.getBaseCha()}",
                             counterText: "",
                           ),
                           keyboardType: TextInputType.number,
                           onChanged: (text) {
-                            _character.setBaseCha(int.parse(text));
+                            this.widget._character.setBaseCha(int.parse(text));
                           },
                         ),
                       ),
@@ -193,12 +192,12 @@ class CharacterEditorState extends State<CharacterEditor> {
                     style: Theme.of(context).textTheme.body2,
                     maxLength: 2,
                     decoration: InputDecoration(
-                      hintText: "${_character.getBAB()}",
+                      hintText: "${this.widget._character.getBAB()}",
                       counterText: "",
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (text) {
-                      _character.setBAB(int.parse(text));
+                      this.widget._character.setBAB(int.parse(text));
                     },
                   ),
                 ),

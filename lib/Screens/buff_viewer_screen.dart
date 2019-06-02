@@ -15,18 +15,17 @@ class BuffViewer extends StatefulWidget {
   BuffViewer(this._character);
   @override
   State<StatefulWidget> createState() {
-    return BuffViewerState(_character);
+    return BuffViewerState();
   }
 }
 
 class BuffViewerState extends State<BuffViewer> {
-  final Character _character;
 
-  BuffViewerState(this._character);
+  BuffViewerState();
 
   void createBuff() {
     Buff newBuff = new Buff();
-    _character.addBuff(newBuff);
+    this.widget._character.addBuff(newBuff);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => BuffEditor(newBuff)),
@@ -34,22 +33,9 @@ class BuffViewerState extends State<BuffViewer> {
     setState(() {});
   }
 
-  // void deleteCharacter(Character victim) async {
-  //   final ConfirmAction choice = await _deleteCharacterDialog();
-  //   if (choice == ConfirmAction.CANCEL) {
-  //     return;
-  //   } else if (choice == ConfirmAction.DELETE) {
-  //     setState(() {
-  //       _characters.remove(victim);
-  //       Navigator.pop(context);
-  //     });
-  //   }
-  // }
-
-  // This is the old deleteBuff. I think I want to edit the one above
   void _deleteBuff(Buff victim) {
     setState(() {
-      _character.buffs.remove(victim);
+      this.widget._character.buffs.remove(victim);
     });
   }
 
@@ -61,7 +47,7 @@ class BuffViewerState extends State<BuffViewer> {
             onSelected: (BuffCardOption result) {
               if (result == BuffCardOption.clear_all) {
                 setState(() {
-                  _character.buffs.clear();
+                  this.widget._character.buffs.clear();
                 });
               }
             },
@@ -84,15 +70,14 @@ class BuffViewerState extends State<BuffViewer> {
                 child: Text(
                   "New Buff",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.body2,
                 ),
                 onPressed: createBuff
                 ),
             Expanded(
               child: ListView.builder(
-                itemCount: _character.buffs.length,
+                itemCount: this.widget._character.buffs.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return BuffCard(_character.buffs[index], _deleteBuff);
+                  return BuffCard(this.widget._character.buffs[index], _deleteBuff);
                 },
               ),
             ),

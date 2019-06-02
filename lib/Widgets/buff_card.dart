@@ -13,7 +13,6 @@ class BuffCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String abilityString = "Str";
 
     return InkWell(
         onTap: () {
@@ -38,7 +37,7 @@ class BuffCard extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                            '${_buff.buffName}',
+                            '${_buff.name}',
                             textScaleFactor: 1.3,
                           ),
                         ),

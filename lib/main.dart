@@ -4,7 +4,6 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 
 import './Screens/manager_screen.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -20,23 +19,21 @@ class MyAppState extends State<MyApp> {
     return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => new ThemeData(
-              primarySwatch: Colors.indigo,
-              brightness: brightness,
-            ),
-        themedWidgetBuilder: (context, theme) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
               accentColor: Colors.green,
               primaryColor: Colors.green,
               textTheme: TextTheme(
                 headline:
                     TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-                title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+                title: TextStyle(fontSize: 20.0, fontStyle: FontStyle.normal),
                 body1: TextStyle(fontSize: 16.0, fontFamily: 'Hind'),
-                body2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+                body2: TextStyle(fontSize: 13.0, fontFamily: 'Hind'),
+                
               ),
             ),
+        themedWidgetBuilder: (context, theme) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: theme,
             home: Manager(),
           );
         });

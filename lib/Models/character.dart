@@ -29,7 +29,7 @@ class Character {
   int getTotalStr() {
     int total = _baseStr;
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].strStat;
+      total += buffs[i].strStat;
     }
     return total;
   }
@@ -37,7 +37,7 @@ class Character {
   int getTotalStrMod() {
     int total = (((getTotalStr() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].strMod;
+      total += buffs[i].strMod;
     }
     return total;
   }
@@ -45,7 +45,7 @@ class Character {
   int getTotalDex() {
     int total = _baseDex;
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].dexStat;
+      total += buffs[i].dexStat;
     }
     return total;
   }
@@ -53,7 +53,7 @@ class Character {
   int getTotalDexMod() {
     int total = (((getTotalDex() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].dexMod;
+      total += buffs[i].dexMod;
     }
     return total;
   }
@@ -61,7 +61,7 @@ class Character {
   int getTotalCon() {
     int total = _baseCon;
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].conStat;
+      total += buffs[i].conStat;
     }
     return total;
   }
@@ -69,7 +69,7 @@ class Character {
   int getTotalConMod() {
     int total = (((getTotalCon() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].conMod;
+      total += buffs[i].conMod;
     }
     return total;
   }
@@ -77,7 +77,7 @@ class Character {
   int getTotalInt() {
     int total = _baseInt;
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].intStat;
+      total += buffs[i].intStat;
     }
     return total;
   }
@@ -85,7 +85,7 @@ class Character {
   int getTotalIntMod() {
     int total = (((getTotalInt() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].intMod;
+      total += buffs[i].intMod;
     }
     return total;
   }
@@ -93,7 +93,7 @@ class Character {
   int getTotalWis() {
     int total = _baseWis;
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].wisStat;
+      total += buffs[i].wisStat;
     }
     return total;
   }
@@ -101,7 +101,7 @@ class Character {
   int getTotalWisMod() {
     int total = (((getTotalWis() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].wisMod;
+      total += buffs[i].wisMod;
     }
     return total;
   }
@@ -109,7 +109,7 @@ class Character {
   int getTotalCha() {
     int total = _baseCha;
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].chaStat;
+      total += buffs[i].chaStat;
     }
     return total;
   }
@@ -117,7 +117,7 @@ class Character {
   int getTotalChaMod() {
     int total = (((getTotalCha() - 10) / 2)).floor();
     for (int i = 0; i < buffs.length; i++) {
-        total += buffs[i].chaMod;
+      total += buffs[i].chaMod;
     }
     return total;
   }
@@ -125,7 +125,83 @@ class Character {
   int getTotalAttackBonus() {
     int total = _bab;
     for (int i = 0; i < buffs.length; i++) {
+      total += buffs[i].attackBonus;
+    }
+    return total;
+  }
+
+  int getActiveStrMod() {
+    int total = (((_baseStr - 10) / 2)).floor();
+    for (int i = 0; i < buffs.length; i++) {
+      if (buffs[i].active) {
+        total += ((buffs[i].strStat / 2)).floor();
+        total += buffs[i].strMod;
+      }
+    }
+    return total;
+  }
+
+  int getActiveDexMod() {
+    int total = (((_baseDex - 10) / 2)).floor();
+    for (int i = 0; i < buffs.length; i++) {
+      if (buffs[i].active) {
+        total += ((buffs[i].dexStat) / 2).floor();
+        total += buffs[i].dexMod;
+      }
+    }
+    return total;
+  }
+
+  int getActiveConMod() {
+    int total = (((_baseCon - 10) / 2)).floor();
+    for (int i = 0; i < buffs.length; i++) {
+      if (buffs[i].active) {
+        total += ((buffs[i].conStat) / 2).floor();
+        total += buffs[i].conMod;
+      }
+    }
+    return total;
+  }
+
+  int getActiveIntMod() {
+    int total = (((_baseInt - 10) / 2)).floor();
+    for (int i = 0; i < buffs.length; i++) {
+      if (buffs[i].active) {
+        total += ((buffs[i].intStat) / 2).floor();
+        total += buffs[i].intMod;
+      }
+    }
+    return total;
+  }
+
+  int getActiveWisMod() {
+    int total = (((_baseWis - 10) / 2)).floor();
+    for (int i = 0; i < buffs.length; i++) {
+      if (buffs[i].active) {
+        total += ((buffs[i].wisStat) / 2).floor();
+        total += buffs[i].wisMod;
+      }
+    }
+    return total;
+  }
+
+  int getActiveChaMod() {
+    int total = (((_baseCha - 10) / 2)).floor();
+    for (int i = 0; i < buffs.length; i++) {
+      if (buffs[i].active) {
+        total += ((buffs[i].chaStat) / 2).floor();
+        total += buffs[i].chaMod;
+      }
+    }
+    return total;
+  }
+
+  int getActiveAttackBonus() {
+    int total = _bab;
+    for (int i = 0; i < buffs.length; i++) {
+      if (buffs[i].active) {
         total += buffs[i].attackBonus;
+      }
     }
     return total;
   }
